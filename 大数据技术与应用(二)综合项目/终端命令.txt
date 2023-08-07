@@ -1,0 +1,62 @@
+2. 数据集与数据预处理
+2.3 数据上传
+2.3.1将数据上传至HDFS
+
+#打开hadoop:
+cd /usr/local/hadoop
+./sbin/start-all.sh
+
+#查看Hadoop
+jps
+
+#删除hdfs下的文件夹douban_movies
+./bin/hdfs dfs -rm -r /douban_movies
+
+#创建文件夹douban_movies
+./bin/hdfs dfs -mkdir -p /douban_movies
+
+#将数据上传到douban_movies
+./bin/hdfs dfs -put /home/hadoop/douban/movie_info.csv /douban_movies
+
+#查看douban_movies.csv前10行
+./bin/hdfs dfs -text /douban_movies/movie_info.csv | head -n 10
+
+
+
+————————————————————————————————————————————
+4. 流数据处理
+4.1 Spark streaming 流数据处理1
+4.1.1 运行项目
+
+#清空文件夹
+rm -rf /usr/local/spark/mycode/douban/src/main/scala/*
+
+#复制文件
+cp /home/hadoop/桌面/movie_info.csv /usr/local/spark/mycode/douban/src/main/scala/
+
+
+————————————————————————————————————————————
+4.2 Spark streaming 流数据处理2
+4.2.1 运行前准备
+#打开zoop4.2.1 打开zookeeper服务
+cd /usr/local/kafka
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+#打开Kafka服务;
+cd /usr/local/kafka
+bin/kafka-server-start.sh config/server.properties
+
+#清空文件夹
+rm -rf /usr/local/spark/mycode/douban/src/main/scala/*
+
+#复制文件
+cp /home/hadoop/桌面/movie_info.csv /usr/local/spark/mycode/douban/src/main/scala/
+
+
+
+
+
+
+
+
+
